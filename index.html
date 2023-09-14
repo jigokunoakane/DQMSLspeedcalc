@@ -2327,11 +2327,11 @@ const higher = 406; // 例として初期値を設定
 let normalCount = 0;
 let abnormalCount = 0;
 
-// 0.975から1.025の間で0.001ずつ増加する51種類の数を生成
-for (let i = 0; i <= 50; i++) {
-  const lowerfinal = lower * (0.975 + 0.001 * i);
-  for (let j = 0; j <= 50; j++) {
-    const higherfinal = higher * (0.975 + 0.001 * j);
+// 0.975から1.025の間で0.005ずつ増加する11種類の数を生成
+for (let i = 0; i <= 10; i++) {
+  const lowerfinal = lower * (0.975 + 0.005 * i);
+  for (let j = 0; j <= 10; j++) {
+    const higherfinal = higher * (0.975 + 0.005 * j);
 
     if (lowerfinal < higherfinal) {
       normalCount++; // 正常
@@ -2349,7 +2349,7 @@ for (let i = 0; i <= 50; i++) {
 }
 
 // 正常と異常の確率を計算
-const totalCombinations = 51 * 51; // 51種類の組み合わせ
+const totalCombinations = 11 * 11; // 11種類の組み合わせ
 const normalProbability = normalCount / totalCombinations;
 const abnormalProbability = abnormalCount / totalCombinations;
 
