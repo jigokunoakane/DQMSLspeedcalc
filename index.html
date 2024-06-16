@@ -220,16 +220,26 @@ border-bottom: 2px solid #b3c8e0;
         モンスA<input type="number" id="compare1" oninput="compareA()" style="width: 2.7rem;">
         &nbsp;B<input type="number" id="compare2" oninput="compareA()" style="width: 2.7rem;">
         <br>
-        正常&nbsp;<span id= normal></span>%
+        正常&nbsp;<span id= "normal"></span>%
         <br>
-        異常&nbsp;<span id= abnormal></span>%
-        <br><br>A最小<span id= compare1min></span>&nbsp;最大<span id= compare1max></span>
-        <br>B最小<span id= compare2min></span>&nbsp;最大<span id= compare2max></span>
+        異常&nbsp;<span id= "abnormal"></span>%
+        <br><br>A最小<span id= "compare1min"></span>&nbsp;最大<span id= "compare1max"></span>
+        <br>B最小<span id= "compare2min"></span>&nbsp;最大<span id= "compare2max"></span>
         <br><br>入力値は左右どちらが大きくてもOK
         
         
       </p>
     </details>
+  
+  <details class="bottomdetails" open>
+    <summary>計算方法2 95-100%</summary>
+    <p>
+   <br>
+        正常&nbsp;<span id= "normal2"></span>%
+        <br>
+        異常&nbsp;<span id= "abnormal2"></span>%
+    </p>
+  </details>
 
 
   <script>
@@ -293,7 +303,43 @@ document.getElementById("compare1max").innerHTML = Math.round(compare1 * 1.025 *
 document.getElementById("compare2min").innerHTML = Math.round(compare2 * 0.975 *1000)/1000;
 document.getElementById("compare2max").innerHTML = Math.round(compare2 * 1.025 *1000)/1000;
 
+
+
+  function simulateTurnOrder(lower, higher) {
+  let normalOrderCount = 0;
+  let reversedOrderCount = 0;
+  const iterations = 10000; // シミュレーション回数
+
+  for (let i = 0; i < iterations; i++) {
+    const lowerAdjusted = lower * (Math.random() * 0.05 + 0.95);
+    const higherAdjusted = higher * (Math.random() * 0.05 + 0.95);
+
+    if (lowerAdjusted <= higherAdjusted) {
+      normalOrderCount++;
+    } else {
+      reversedOrderCount++;
+    }
+  }
+
+  const normalOrderProbability = (normalOrderCount / iterations) * 100;
+  const reversedOrderProbability = (reversedOrderCount / iterations) * 100;
+
+  console.log(`素早さ ${lower} - ${higher}:`);
+  console.log(`正常な行動順: ${normalOrderProbability.toFixed(2)}%`);
+  console.log(`逆転した行動順: ${reversedOrderProbability.toFixed(2)}%`);
+   document.getElementById("normal2").innerHTML = normalOrderProbability;
+     document.getElementById("abnormal2").innerHTML =  reversedOrderProbability;
+   
 }
+
+
+simulateTurnOrder(lower, higher);
+}
+
+
+
+
+    
   </script>
 
 </body>
